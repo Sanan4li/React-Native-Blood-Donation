@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, Button} from "react-native";
-import BottomNavigator from "./Navigation/BottomNavigator";
 import DrawerNavigator from "./Navigation/DrawerNavigator";
-import TopNavigator from "./Navigation/TopNavigator";
+import FirstTime from "./Screens/FirstTime";
 const App: () => React$Node = () => {
+  let [go, setGo] = useState(false); 
   return (
   
-  //  <BottomNavigator/>
-   <DrawerNavigator/>
+    go?<DrawerNavigator/>:<FirstTime setGo={setGo}/>
+  
+    //  <BottomNavigator/>
+  //  <DrawerNavigator/>
     //  <TopNavigator/>
   );
 };
