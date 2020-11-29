@@ -1,11 +1,24 @@
-import React from 'react'
-import {View, Text, Image} from "react-native";
+import React, {useEffect} from 'react'
+import {View, Text, Image, StatusBar} from "react-native";
 import Onboarding from 'react-native-onboarding-swiper';
+const changeStatusBar = ()=>{
+    StatusBar.setBackgroundColor("#fe6e58");
+}
+
  function FirstTime(props) {
+    useEffect(
+        ()=>{
+            StatusBar.setBackgroundColor("#fe6e58");
+        }, []
+    )
     return (
-        
-            <Onboarding
+            
+            <Onboarding                               
+            
             onDone={() => props.setGo(true)}
+            onSkip={() => props.setGo(true)}
+            // pageIndexCallback={changeStatusBar}
+            // controlStatusBar={true}
                 pages={[
                     {
                       backgroundColor: '#fe6e58',
