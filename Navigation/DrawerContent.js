@@ -1,9 +1,11 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import {View , Text, StyleSheet , Image} from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { DrawerContentScrollView , DrawerItem, DrawerItemList} from "@react-navigation/drawer";
+import {AuthContext} from "../Context/AuthProvider";
  function Menu(props) {
+     const {logout} = useContext(AuthContext);
     return (
         <DrawerContentScrollView {...props}>
             <View style={styles.container}>
@@ -18,20 +20,24 @@ import { DrawerContentScrollView , DrawerItem, DrawerItemList} from "@react-navi
                icon={({ color, size }) => (
                 <MaterialIcons
                   name="logout"
-                  color="white"
+                  color={color}
                   size={size}
                 />
               )}
               label="Logout"
-              inactiveTintColor="white"
-              
+              inactiveTintColor="black"
+              labelStyle={{
+                fontFamily:"Helvetica-Bold-Font",
+              }}
               style={{
                   width:"100%",
                   marginLeft:0,
                   borderRadius:0,
                   padding:1,
+                  
+                  
               }}
-              onPress={() => {}}
+              onPress={() => {logout()}}
             />    
               
         
@@ -43,10 +49,10 @@ import { DrawerContentScrollView , DrawerItem, DrawerItemList} from "@react-navi
 }
 const styles = StyleSheet.create({
     container : {
-        
         height :120,
-        padding:20,
-        backgroundColor:"black",
+        marginTop:-5,
+        padding:10,
+        backgroundColor:"#fe6e58",
         justifyContent:"center",
         alignItems: "center",
     },
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
     text: {
         color:"white",
         fontSize:18,
-        fontFamily:"Helvetica-Bold-Font"
+        fontFamily:"Helvetica-Bold-Font",
     }
 })
 export default Menu;

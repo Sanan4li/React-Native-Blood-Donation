@@ -7,6 +7,8 @@ import CategoriesScreen from "../src/Screens/CategoriesScreen";
 import HomeScreen from "../src/Screens/HomeScreen";
 import FavScreen from "../src/Screens/FavScreen";
 import AboutScreen from "../src/Screens/AboutScreen";
+import BecomeDonor from "../src/Screens/BecomeDonor";
+import RequestBlood from "../src/Screens/RequestBlood";
 import DrawerContent from "./DrawerContent";
 import Icon from "react-native-vector-icons/Entypo";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -19,9 +21,10 @@ class DrawerNavigator extends Component {
     return (
      <Stack.Navigator screenOptions={DefaultStyle}>
        <Stack.Screen name="Home" component={HomeScreen} options={{
+          headerTitle:"Hayatian's Blood Society",
          headerLeft : ()=>{
            return (
-          <Icon.Button  backgroundColor="black" name="menu" size={30} onPress={
+          <Icon.Button  backgroundColor="#fe6e58" name="menu" size={30} onPress={
            ()=>{
             props.navigation.openDrawer();
            }
@@ -36,7 +39,12 @@ class DrawerNavigator extends Component {
             />
           )
        }} />
-       {/* <Stack.Screen name="About" component={AboutScreen}/> */}
+       <Stack.Screen name="RequestBlood" component={RequestBlood}  options={{
+          headerTitle: ""
+        }} />
+       <Stack.Screen name="BecomeDonor" component={BecomeDonor} options={{
+           headerTitle: ""
+        }} />
    </Stack.Navigator>
     )
    }
@@ -46,7 +54,7 @@ class DrawerNavigator extends Component {
        <Stack.Screen name="Categories" component={CategoriesScreen}  options={{
          headerLeft : ()=>{
            return (
-          <Icon.Button  backgroundColor="black" name="menu" size={30} onPress={
+          <Icon.Button  backgroundColor="#fe6e58" name="menu" size={30} onPress={
            ()=>{
             props.navigation.openDrawer();
            }
@@ -72,7 +80,7 @@ FavStack = (props)=>{
        <Stack.Screen name="Favorites" component={FavScreen}   options={{
          headerLeft : ()=>{
            return (
-          <Icon.Button  backgroundColor="black" name="menu" size={30} onPress={
+          <Icon.Button  backgroundColor="#fe6e58" name="menu" size={30} onPress={
            ()=>{
             props.navigation.openDrawer();
            }
@@ -91,7 +99,7 @@ FavStack = (props)=>{
        <Stack.Screen name="About" component={AboutScreen}  options={{
          headerLeft : ()=>{
            return (
-          <Icon.Button  backgroundColor="black" name="menu" size={30} onPress={
+          <Icon.Button  backgroundColor="#fe6e58" name="menu" size={30} onPress={
            ()=>{
             props.navigation.openDrawer();
            }
@@ -110,26 +118,30 @@ FavStack = (props)=>{
     render(){
       return (
         <NavigationContainer>
-           <StatusBar backgroundColor="black" barStyle="light-content" />
+           <StatusBar backgroundColor="#fe6e58" barStyle="light-content" />
          <Drawer.Navigator 
          drawerContent= {(props)=>{
           return <DrawerContent {...props}/>
          }
         }
          drawerStyle={{
-          backgroundColor: '#262626',
+          backgroundColor: '#f2f2f2',
           
         }}
         drawerContentOptions={{
-          activeTintColor: '#00ff00',
-          activeBackgroundColor : "black",
-          inactiveTintColor:"white",
-          itemStyle:{width:"100%", marginLeft:0,borderRadius:0, padding:1, marginVertical:1}
+          activeTintColor: '#fff',
+          labelStyle:{
+            fontFamily:"Helvetica-Bold-Font",
+          },
+          activeBackgroundColor : "#fe6e58",
+          inactiveTintColor:"#262626",
+          itemStyle:{width:"100%", marginLeft:0,borderRadius:0, padding:1, marginVertical:1, }
         }}
        
          >
-            <Drawer.Screen name="Home" component={this.HomeStack}
+            <Drawer.Screen name="Home" component={this.HomeStack} 
             options={{
+             
               drawerIcon : ({focused, color})=>{
                 return  <FontAwesome5
                 name="home"
@@ -186,7 +198,7 @@ FavStack = (props)=>{
 }
 const DefaultStyle = {
   headerStyle: {
-    backgroundColor: 'black',
+    backgroundColor: '#fe6e58',
     elevation:0,
   },
  // headerTitle : "Testing",

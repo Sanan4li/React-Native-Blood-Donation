@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {View, Text, StatusBar} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from "../Screens/Login";
-import Signup from "../Screens/Signup";
+import Login from "../src/Screens/Login";
+import Signup from "../src/Screens/Signup";
 const Stack = createStackNavigator();
  function AuthStack() {
     return (
@@ -15,7 +15,11 @@ const Stack = createStackNavigator();
                     headerShown: false
                   }}
                 />
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="Signup" component={Signup}
+                options={{
+                    headerShown: false
+                  }}
+                />
             </Stack.Navigator>
     </NavigationContainer>
     )

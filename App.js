@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
-import {View, Text, Button} from "react-native";
-import DrawerNavigator from "./Navigation/DrawerNavigator";
-import AuthStack from "./Navigation/AuthStack";
-import FirstTime from "./Screens/FirstTime";
+import React, {  useState, useEffect }  from 'react';
+
+import Routers from "./Routers";
 const App: () => React$Node = () => {
-  let [go, setGo] = useState(false); 
+ 
   return (
-    
-    go?<AuthStack/>:<FirstTime setGo={setGo}/>
-  
-    //  <BottomNavigator/>
-  //  <DrawerNavigator/>
-    //  <TopNavigator/>
-  );
+    <Routers />
+  )
+
 };
 
 export default App;
