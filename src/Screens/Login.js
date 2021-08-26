@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity,StyleSheet, Image, TextInput , ActivityIndi
 import { AuthContext } from "../../Context/AuthProvider";
 
  function Login({navigation}) {
-     const {login , error, setError} = useContext(AuthContext);
+    const {login , error, setError} = useContext(AuthContext);
     const [data, setData] = useState({
         email : "",
         password : "",
@@ -135,7 +135,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 
         )
 }
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor:"#fe6e58",

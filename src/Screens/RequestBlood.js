@@ -1,4 +1,6 @@
 import React , {useState} from 'react';
+import uuid from 'react-uuid';
+import database from '@react-native-firebase/database';
 import {View, Text, StyleSheet , TextInput, TouchableOpacity , Picker } from "react-native";
 
  function RequestBlood() {
@@ -11,7 +13,8 @@ import {View, Text, StyleSheet , TextInput, TouchableOpacity , Picker } from "re
         isValidMobile : true,
         isLoading : false,
     });
-    const [selectedValue, setSelectedValue] = useState("Select Your Blood Type");
+    const [selectedValue, setSelectedValue] = useState("O+");
+    const [selectedCityValue, setSelectedCityValue] = useState("Gujrat");
     const isValidInformation = ()=>{
         if(data.name.trim() === "" || data.name.length<3){
             setData({
@@ -64,7 +67,18 @@ import {View, Text, StyleSheet , TextInput, TouchableOpacity , Picker } from "re
 
     const requestBloodButtonHandler = ()=>{
         if(isValidInformation()){
-            console.log("Everthing is Fine");
+            let id = uuid();
+            console.log("Everthing is Fine", data, selectedCityValue, selectedValue);
+            database()
+            .ref('/requests/'+id)
+            .set({
+              patientName: data.name,
+              hospitalName: data.hospital,
+              mobileNo: data.mobile,
+              city: selectedCityValue,
+              bloodGroup: selectedValue,
+            })
+            .then(() => console.log('Data set.'));
         }
         else{
             console.log("Error");
@@ -100,10 +114,10 @@ import {View, Text, StyleSheet , TextInput, TouchableOpacity , Picker } from "re
                <View style={styles.inputConatiner}>
                    <Text style={styles.labelText}> City  </Text>
                    <View style={styles.selectBox}>
-                    <Picker
-                        selectedValue={selectedValue}
-                        style={{  width: "100%", marginLeft:10, color:"#666666", padding:12}}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                   <Picker
+                        selectedValue={selectedCityValue}
+                        style={styles.picker}
+                        onValueChange={(itemValue, itemIndex) => setSelectedCityValue(itemValue)}
                         >
                         <Picker.Item label="Gujrat" value="Gujrat" />
                         <Picker.Item label="Kharian" value="Kharian" />
@@ -118,17 +132,17 @@ import {View, Text, StyleSheet , TextInput, TouchableOpacity , Picker } from "re
                    <View style={styles.selectBox}>
                     <Picker
                         selectedValue={selectedValue}
-                        style={{  width: "100%", marginLeft:10, color:"#666666", padding:12}}
+                        style={styles.picker}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                        <Picker.Item label="O+" value="O_Positive" />
-                        <Picker.Item label="O-" value="O_Negative" />
-                        <Picker.Item label="A+" value="A_Positive" />
-                        <Picker.Item label="A-" value="A_Negative" />
-                        <Picker.Item label="B+" value="B_Positive" />
-                        <Picker.Item label="B-" value="B_Negative" />
-                        <Picker.Item label="AB+" value="AB_Positive" />
-                        <Picker.Item label="AB-" value="AB_Negative" />
+                        <Picker.Item label="O+" value="O+" />
+                        <Picker.Item label="O-" value="O-" />
+                        <Picker.Item label="A+" value="A+" />
+                        <Picker.Item label="A-" value="A-" />
+                        <Picker.Item label="B+" value="B+" />
+                        <Picker.Item label="B-" value="B-" />
+                        <Picker.Item label="AB+" value="AB+" />
+                        <Picker.Item label="AB-" value="AB-" />
                     </Picker>
                    </View>
                </View>
@@ -156,6 +170,12 @@ const styles = StyleSheet.create({
         alignItems:"center",
         padding:8,
       
+    },
+    picker:{
+      width: "100%", 
+      marginLeft:10, 
+      color:"#666666", 
+      padding:12
     },
     requestText:{
         fontFamily:"Helvetica-Bold-Font",
